@@ -1,4 +1,4 @@
-package com.example.azkary
+package com.example.azkary.Presentaion.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.azkary.R
 
 class Azkary : Screen {
     @Composable
@@ -39,7 +40,7 @@ class Azkary : Screen {
         )
 
 
-        
+
 
 
 

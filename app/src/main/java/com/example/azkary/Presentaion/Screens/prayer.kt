@@ -1,4 +1,4 @@
-package com.example.azkary
+package com.example.azkary.Presentaion.Screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -26,13 +26,11 @@ class Prayer : Screen {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     override fun Content() {
-        // تدرج لوني للخلفية
-        val backgroundGradient = Brush.verticalGradient(
+         val backgroundGradient = Brush.verticalGradient(
             colors = listOf(Color(0xFFE8F5E9), Color(0xFFF1F8E9))
         )
 
-        // ألوان البطاقات
-        val cardColorsList = listOf(
+         val cardColorsList = listOf(
             Color(0xFFFFF59D), // أصفر فاتح
             Color(0xFFA5D6A7), // أخضر فاتح
             Color(0xFF81D4FA), // أزرق فاتح
