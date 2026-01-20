@@ -1,5 +1,6 @@
 package com.example.azkary.Presentaion.Screens
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,10 +27,14 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.example.azkary.R
 
+
+
+
 class Azkary : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
+        val context = androidx.compose.ui.platform.LocalContext.current
 
         val backgroundGradient = Brush.verticalGradient(
             colors = listOf(
@@ -38,6 +43,7 @@ class Azkary : Screen {
                 Color(0xFF55BDF3)
             )
         )
+
 
 
 
@@ -177,7 +183,14 @@ class Azkary : Screen {
                             verticalAlignment = Alignment.CenterVertically,
                             modifier = Modifier
                                 .clip(RoundedCornerShape(24.dp))
-                                .clickable { /* مشاركة التطبيق */ }
+                                .clickable {
+                                    val sendIntent = Intent(Intent.ACTION_SEND).apply {
+                                        putExtra(Intent.EXTRA_TEXT, "حمل تطبيق أذكاري وشارك في الخير: https://play.google.com/store/apps/details?id=com.example.azkary")
+                                        type = "text/plain"
+                                    }
+                                    val shareIntent = Intent.createChooser(sendIntent, "شارك التطبيق")
+                                    context.startActivity(shareIntent)
+                                }
                                 .padding(horizontal = 16.dp, vertical = 8.dp)
                         ) {
                             Icon(
@@ -202,6 +215,8 @@ class Azkary : Screen {
         }
     }
 }
+
+
 
 // مكون زر الخيار المخصص
 @Composable
