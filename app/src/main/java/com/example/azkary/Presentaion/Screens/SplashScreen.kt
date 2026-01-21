@@ -1,5 +1,7 @@
 package com.example.azkary.Presentaion.Screens
 
+import com.example.azkary.Presentaion.Screens.Azkary
+import com.example.azkary.Presentaion.Screens.MainLayout
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.ui.text.font.FontWeight
@@ -33,7 +36,7 @@ class SplashScreen : Screen {
 
         LaunchedEffect(key1 = true) {
             delay(3000)
-            navigator.replace(Azkary())
+            navigator.replace(MainLayout())
         }
 
         // Background Gradient (Dark Blue/Teal)
@@ -58,24 +61,6 @@ class SplashScreen : Screen {
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier.padding(16.dp)
             ) {
-                // Top Arabic Text (Bismilah or Salawat if available, using placeholder or icon)
-                Text(
-                    text = "ﷺ",
-                    color = Color(0xFFFFD700), // Gold
-                    fontSize = 32.sp,
-                    modifier = Modifier.padding(bottom = 32.dp)
-                )
-
-                // Main Mosque Image/Icon
-                Image(
-                    painter = painterResource(id = R.drawable.g),
-                    contentDescription = "Logo",
-                    modifier = Modifier
-                        .size(180.dp)
-                        .padding(bottom = 24.dp),
-                    contentScale = ContentScale.Fit
-                )
-
                 // App Title
                 Text(
                     text = "تطبيق أذكاري",
@@ -85,12 +70,25 @@ class SplashScreen : Screen {
                     modifier = Modifier.padding(bottom = 16.dp)
                 )
 
-                // Subtitle
+                // Subtitle (Campaign)
+
+
+                // Main Mosque Image/Icon (Now at Bottom)
+                Image(
+                    painter = painterResource(id = R.drawable.g),
+                    contentDescription = "Logo",
+                    modifier = Modifier
+                        .size(200.dp) // Slightly larger
+                        .padding(bottom = 24.dp),
+                    contentScale = ContentScale.Fit
+                )
+                Spacer(modifier = Modifier.size(14.dp))
                 Text(
                     text = "ما تنساش تصلِّي على النبي",
                     color = Color.White.copy(alpha = 0.8f),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Medium
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Medium,
+                    modifier = Modifier.padding(bottom = 32.dp)
                 )
             }
         }
