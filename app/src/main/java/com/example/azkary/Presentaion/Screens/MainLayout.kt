@@ -153,13 +153,26 @@ class MainLayout : Screen {
 
                 // --- In-App Reminder Logic ---
                 var showReminder by remember { mutableStateOf(false) }
+                val azkarReminders = remember {
+                    listOf(
+                        "سبحان الله",
+                        "الحمد لله",
+                        "الله أكبر",
+                        "لا إله إلا الله",
+                        "أستغفر الله",
+                        "لا حول ولا قوة إلا بالله",
+                        "صلِّ على النبي ﷺ"
+                    )
+                }
+                var currentZikr by remember { mutableStateOf(azkarReminders.first()) }
 
                 LaunchedEffect(Unit) {
                     while(true) {
+                        currentZikr = azkarReminders.random() // Pick a random Zikr
                         showReminder = true
-                        delay(10 * 1000L) // Show for 10 seconds
+                        delay(7000L) // Show for 7 seconds
                         showReminder = false
-                        delay(60 * 1000L) // Wait 1 minute
+                        delay(10 * 1000L) // Wait 10 seconds
                     }
                 }
 
@@ -190,7 +203,7 @@ class MainLayout : Screen {
                              )
                             Spacer(modifier = Modifier.width(12.dp))
                             Text(
-                                text = "ما تنساش تصلِّي على النبي ﷺ",
+                                text = currentZikr,
                                 color = Color.White,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 16.sp

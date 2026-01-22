@@ -9,6 +9,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -44,7 +47,7 @@ class About : Screen {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(23.dp))
             
             Icon(
                 imageVector = Icons.Default.Info,
@@ -64,7 +67,7 @@ class About : Screen {
             )
 
             Card(
-                shape = RoundedCornerShape(24.dp), // More rounded
+                shape = RoundedCornerShape(24.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 elevation = CardDefaults.cardElevation(8.dp),
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
@@ -72,7 +75,7 @@ class About : Screen {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(32.dp),
+                        .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
                 ) {
@@ -84,34 +87,101 @@ class About : Screen {
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
                     
-                    Spacer(modifier = Modifier.height(16.dp))
-                    
-                    Text(
-                        text = "ما تنساش تصلِّي على النبي",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFFFA726),
-                        modifier = Modifier.padding(vertical = 8.dp),
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                    )
+                    Spacer(modifier = Modifier.height(24.dp))
 
-                    Spacer(modifier = Modifier.height(16.dp))
+                    // Feature 1
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End // Right to Left alignment for Arabic
+                    ) {
+                        Text(
+                            text = "تسهيل قراءة الأذكار اليومية",
+                            fontSize = 18.sp,
+                            color = Color.DarkGray,
+                            fontWeight = FontWeight.Medium,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                            modifier = Modifier.weight(1f).padding(end = 12.dp)
+                        )
+                        Icon(Icons.Default.Star, contentDescription = null, tint = Color(0xFFFFA726), modifier = Modifier.size(24.dp))
+                    }
+                    
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Feature 2
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            text = "خالي تماماً من الإعلانات",
+                            fontSize = 18.sp,
+                            color = Color.DarkGray,
+                            fontWeight = FontWeight.Medium,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                            modifier = Modifier.weight(1f).padding(end = 12.dp)
+                        )
+                        Icon(Icons.Default.Info, contentDescription = null, tint = Color(0xFF29B6F6), modifier = Modifier.size(24.dp))
+                    }
+
+                     Spacer(modifier = Modifier.height(12.dp))
+
+                    // Feature 3
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                         Text(
+                            text = "تصميم بسيط وسهل لكبار السن",
+                            fontSize = 18.sp,
+                            color = Color.DarkGray,
+                            fontWeight = FontWeight.Medium,
+                             textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                             modifier = Modifier.weight(1f).padding(end = 12.dp)
+                        )
+                         Icon(Icons.Default.Favorite, contentDescription = null, tint = Color(0xFFEF5350), modifier = Modifier.size(24.dp))
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // Feature 4
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        Text(
+                            text = "دعم القراءة الصوتية للأذكار",
+                            fontSize = 18.sp,
+                            color = Color.DarkGray,
+                            fontWeight = FontWeight.Medium,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.End,
+                            modifier = Modifier.weight(1f).padding(end = 12.dp)
+                        )
+                         Icon(Icons.Default.PlayArrow, contentDescription = null, tint = Color(0xFF66BB6A), modifier = Modifier.size(24.dp))
+                    }
+
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Divider(color = Color.LightGray, thickness = 1.dp)
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     Text(
                         text = "تطوير: يوسف البسيوني",
-                        fontSize = 22.sp,
+                        fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black,
+                        color = Color(0xFF1A4F8E),
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
                     
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     
                     Text(
-                        text = "نسألكم الدعاء له ولوالديه",
-                        fontSize = 20.sp,
+                        text = "نسألكم الدعاء له و لوالديه",
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.DarkGray,
+                        color = Color.Gray,
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center
                     )
                 }
@@ -134,9 +204,9 @@ class About : Screen {
                 modifier = Modifier.fillMaxWidth().height(56.dp).padding(horizontal = 32.dp)
             ) {
                 Icon(Icons.Default.Share, contentDescription = null, tint = Color.White)
-                Spacer(modifier = Modifier.width(15.dp))
+                Spacer(modifier = Modifier.width(10.dp))
                 Text(
-                    text = "شارك التطبيق",
+                    text = "شارك التطبيق لنيل الثواب سوا",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White

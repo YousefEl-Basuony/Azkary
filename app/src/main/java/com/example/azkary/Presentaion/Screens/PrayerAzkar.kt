@@ -171,7 +171,7 @@ class PrayerAzkar : Screen {
                             )
                         }
                         is PrayerItem.Zikr -> {
-                            PrayerZikrCard(item, ttsManager)
+                            PrayerZikrCard(item, ttsManager, context)
                         }
                     }
                 }
@@ -180,8 +180,9 @@ class PrayerAzkar : Screen {
     }
 
     @Composable
-    fun PrayerZikrCard(zikr: PrayerItem.Zikr, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager) {
-        var count by remember { mutableStateOf(zikr.count) }
+    fun PrayerZikrCard(zikr: PrayerItem.Zikr, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager, context: android.content.Context) {
+        val persistenceManager = remember { com.example.azkary.Presentaion.Utils.AzkarPersistenceManager(context) }
+        var count by remember { mutableStateOf(persistenceManager.getCount(zikr.audioFileName.ifEmpty { zikr.text.take(20) }, zikr.count)) }
         val uniqueId = zikr.audioFileName.ifEmpty { zikr.text.take(20) }
         val isPlaying = ttsManager.isSpeaking(uniqueId)
         
@@ -190,7 +191,10 @@ class PrayerAzkar : Screen {
             colors = CardDefaults.cardColors(containerColor = Color.White),
             elevation = CardDefaults.cardElevation(2.dp),
             modifier = Modifier.fillMaxWidth().clickable {
-                if (count > 0) count--
+                if (count > 0) {
+                    count--
+                    persistenceManager.saveCount(uniqueId, count)
+                }
             }
         ) {
             Column(

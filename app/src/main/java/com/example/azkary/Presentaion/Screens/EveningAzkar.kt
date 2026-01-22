@@ -230,16 +230,20 @@ class EveningAzkar : Screen {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(azkarList) { zikr ->
-                    ZikrCard(zikr, ttsManager)
+                    ZikrCard(zikr, ttsManager, context)
                 }
             }
         }
     }
 
     @Composable
-    fun ZikrCard(zikr: ZikrData, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager) {
-        var count by remember { mutableStateOf(zikr.count) }
+    fun ZikrCard(zikr: ZikrData, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager, context: android.content.Context) {
+        val persistenceManager = remember { com.example.azkary.Presentaion.Utils.AzkarPersistenceManager(context) }
         val uniqueId = zikr.audioFileName.ifEmpty { zikr.zikr.take(20) }
+        
+        // Load initial count from persistence
+        var count by remember { mutableStateOf(persistenceManager.getCount(uniqueId, zikr.count)) }
+        
         val isPlaying = ttsManager.isSpeaking(uniqueId)
         
         Card(
@@ -247,7 +251,10 @@ class EveningAzkar : Screen {
             colors = CardDefaults.cardColors(containerColor = Color(0xFFECF0F1)), // Light Grey Card for contrast against Dark Background
             elevation = CardDefaults.cardElevation(4.dp),
             modifier = Modifier.fillMaxWidth().clickable {
-                if (count > 0) count--
+                if (count > 0) {
+                    count--
+                    persistenceManager.saveCount(uniqueId, count)
+                }
             }
         ) {
             Column(
