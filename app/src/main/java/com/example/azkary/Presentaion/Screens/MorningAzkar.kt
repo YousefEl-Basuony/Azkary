@@ -235,19 +235,16 @@ class MorningAzkar : Screen {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(azkarList) { zikr ->
-                    ZikrCard(zikr, ttsManager, context)
+                    ZikrCard(zikr, ttsManager)
                 }
             }
         }
     }
 
     @Composable
-    fun ZikrCard(zikr: ZikrData, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager, context: android.content.Context) {
-        val persistenceManager = remember { com.example.azkary.Presentaion.Utils.AzkarPersistenceManager(context) }
+    fun ZikrCard(zikr: ZikrData, ttsManager: com.example.azkary.Presentaion.Utils.TextToSpeechManager) {
+        var count by remember { mutableStateOf(zikr.count) }
         val uniqueId = zikr.audioFileName.ifEmpty { zikr.zikr.take(20) } // Use unique ID
-        
-        // Load initial count from persistence
-        var count by remember { mutableStateOf(persistenceManager.getCount(uniqueId, zikr.count)) }
         
         val isPlaying = ttsManager.isSpeaking(uniqueId)
 
@@ -258,7 +255,6 @@ class MorningAzkar : Screen {
             modifier = Modifier.fillMaxWidth().clickable {
                 if (count > 0) {
                     count--
-                    persistenceManager.saveCount(uniqueId, count)
                 }
             }
         ) {

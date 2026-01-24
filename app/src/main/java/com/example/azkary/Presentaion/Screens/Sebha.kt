@@ -25,7 +25,8 @@ import android.view.HapticFeedbackConstants
 class Sebha : Screen {
     @Composable
     override fun Content() {
-        var count by remember { mutableStateOf(0) }
+        val context = androidx.compose.ui.platform.LocalContext.current
+        val persistenceManager = remember { com.example.azkary.Presentaion.Utils.AzkarPersistenceManager(context) }
         
         // List of Azkar
         val azkarList = listOf(
@@ -41,6 +42,11 @@ class Sebha : Screen {
         
         var currentZikrIndex by remember { mutableStateOf(0) }
         val currentZikr = azkarList[currentZikrIndex]
+        
+        // Load persisted count for the current Zikr
+        var count by remember(currentZikr) { 
+            mutableStateOf(persistenceManager.getCount("sebha_$currentZikr", 0)) 
+        }
 
         val backgroundGradient = Brush.verticalGradient(
             colors = listOf(Color(0xFFE0F7FA), Color(0xFF80DEEA))
@@ -65,7 +71,7 @@ class Sebha : Screen {
                     .clickable {
                         // Cycle through Azkar list
                         currentZikrIndex = (currentZikrIndex + 1) % azkarList.size
-                        count = 0 // Optional: Reset count on change? User didn't request, but often preferred. Keeping it independent for now based on typical behavior.
+                        // Count will automatically update via the remember(currentZikr) block
                     }
             ) {
                 Column(
@@ -118,6 +124,7 @@ class Sebha : Screen {
                     .background(Color(0xFF0097A7))
                     .clickable { 
                         count++
+                        persistenceManager.saveCount("sebha_$currentZikr", count)
                         view.performHapticFeedback(android.view.HapticFeedbackConstants.LONG_PRESS)
                     },
                 contentAlignment = Alignment.Center
@@ -134,7 +141,10 @@ class Sebha : Screen {
 
             // Reset Button
             IconButton(
-                onClick = { count = 0 },
+                onClick = { 
+                    count = 0 
+                    persistenceManager.saveCount("sebha_$currentZikr", 0)
+                },
                 modifier = Modifier
                     .size(60.dp)
                     .background(Color.White, CircleShape)

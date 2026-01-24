@@ -54,7 +54,7 @@ class About : Screen {
                 contentDescription = null,
                 tint = Color.White,
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(55.dp)
                     .padding(bottom = 16.dp)
             )
 
