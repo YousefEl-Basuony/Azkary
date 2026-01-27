@@ -22,8 +22,8 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.List
+import androidx.compose.material.icons.rounded.BlurCircular
+import androidx.compose.material.icons.rounded.MenuBook
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -76,7 +76,7 @@ class MainLayout : Screen {
                                     )
                             ) {
                                 Icon(
-                                    imageVector = Icons.Rounded.List,
+                                    imageVector = Icons.Rounded.BlurCircular,
                                     contentDescription = "السبحة",
                                     tint = if (selectedItem == 0) Color(0xFF1A4F8E) else Color.White,
                                     modifier = Modifier.size(24.dp)
@@ -104,7 +104,7 @@ class MainLayout : Screen {
                             verticalArrangement = androidx.compose.foundation.layout.Arrangement.Center
                         ) {
                             Icon(
-                                imageVector = Icons.Rounded.Info,
+                                imageVector = Icons.Rounded.MenuBook,
                                 contentDescription = "عن التطبيق",
                                 tint = if (selectedItem == 2) Color(0xFFFFA726) else Color.White.copy(alpha = 0.7f),
                                 modifier = Modifier.size(26.dp)
